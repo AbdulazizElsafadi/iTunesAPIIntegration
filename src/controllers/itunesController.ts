@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
 import { iTunesResult } from "../models/itunesModels";
-import { search_results } from "../models/search_results";
 import db from "../db/knex";
 
 export const searchITunes = async (req: Request, res: Response) => {
@@ -19,13 +18,8 @@ export const searchITunes = async (req: Request, res: Response) => {
 
     // Save results to DB
     for (let result of results) {
-      db("search_results")
-        .insert({
-          trackName: result.trackName,
-          artistName: result.artistName,
-          collectionName: result.collectionName,
-          trackViewUrl: result.trackViewUrl,
-        })
+      db<iTunesResult>("search_results")
+        .insert(result)
         .then((data) => {
           console.log("Data inserted:", data);
         })
