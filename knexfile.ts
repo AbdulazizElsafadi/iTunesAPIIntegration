@@ -8,7 +8,7 @@ const config: { [key: string]: Knex.Config } = {
     },
     useNullAsDefault: true,
     migrations: {
-      directory: "./migrations", // Path to your migration files
+      directory: "./src/migrations", // Path to your migration files
     },
   },
 };
